@@ -23,7 +23,7 @@ def Summarize(df, column, title):
         ('all', df[column]),
         ('male', df[df.sex == 1][column]),
         ('female', df[df.sex == 2][column]),
-        ]
+    ]
 
     print(title)
     print('key\tn\tmean\tvar\tstd\tcv')
@@ -71,7 +71,7 @@ def ReadBrfss(filename='CDBRFS08.ASC.gz', compression='gzip', nrows=None):
         ('finalwt', 799, 808, int),
         ('wtkg2', 1254, 1258, int),
         ('htm3', 1251, 1253, int),
-        ]
+    ]
     columns = ['name', 'start', 'end', 'type']
     variables = pandas.DataFrame(var_info, columns=columns)
     variables.end += 1
@@ -152,7 +152,7 @@ def main(script, nrows=1000):
     """
     thinkstats2.RandomSeed(17)
 
-    nrows = int(nrows)    
+    nrows = int(nrows)
     df = ReadBrfss(nrows=nrows)
     MakeFigures(df)
 
