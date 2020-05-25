@@ -64,7 +64,7 @@ def PlotEwmaPredictions(daily, name):
 
     # use EWMA to estimate slopes
     filled = timeseries.FillMissing(daily)
-    filled['slope'] = pandas.ewma(filled.ppg.diff(), span=180)
+    filled['slope'] = pandas.DataFrame.ewm(filled.ppg.diff(), span=180).mean()
     filled[-1:]
 
     # extract the last inter and slope

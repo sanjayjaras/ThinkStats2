@@ -382,8 +382,8 @@ def FillMissing(daily, span=30):
     """
     dates = pandas.date_range(daily.index.min(), daily.index.max())
     reindexed = daily.reindex(dates)
-
-    ewma = pandas.ewma(reindexed.ppg, span=span)
+    
+    ewma = pandas.DataFrame.ewm(reindexed.ppg, span=span).mean()
 
     resid = (reindexed.ppg - ewma).dropna()
     fake_data = ewma + thinkstats2.Resample(resid, len(reindexed))
@@ -527,7 +527,7 @@ def PlotRollingMean(daily, name):
 
     thinkplot.SubPlot(2)
     thinkplot.Scatter(reindexed.ppg, s=15, alpha=0.1, label=name)
-    ewma = pandas.ewma(reindexed.ppg, span=30)
+    ewma = pandas.DataFrame.ewm(reindexed.ppg, span=30).mean()
     thinkplot.Plot(ewma, label='EWMA')
     pyplot.xticks(rotation=30)
     thinkplot.Save(root='timeseries10',
